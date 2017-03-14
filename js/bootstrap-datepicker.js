@@ -674,8 +674,13 @@
 			var parentsZindex = [];
 			this.element.parents().each(function(){
 				var itemZIndex = $(this).css('z-index');
-				if (itemZIndex !== 'auto' && itemZIndex !== 0) parentsZindex.push(parseInt(itemZIndex));
+				if (itemZIndex !== 'auto' && itemZIndex !== 0) {
+					parentsZindex.push(parseInt(itemZIndex));
+				}
 			});
+			if ( parentsZindex.length == 0) {
+					parentsZindex.push(1);
+			}
 			var zIndex = Math.max.apply(Math, parentsZindex) + this.o.zIndexOffset;
 			var offset = this.component ? this.component.parent().offset() : this.element.offset();
 			var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
